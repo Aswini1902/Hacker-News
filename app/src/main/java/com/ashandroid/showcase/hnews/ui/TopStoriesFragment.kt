@@ -1,7 +1,6 @@
 package com.ashandroid.showcase.hnews.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import com.ashandroid.showcase.hnews.adapter.StoriesListener
 import com.ashandroid.showcase.hnews.adapter.TopStoriesAdapter
 import com.ashandroid.showcase.hnews.databinding.FragmentTopStoriesBinding
-import com.ashandroid.showcase.hnews.model.Stories
 
 
 class TopStoriesFragment : Fragment() {
