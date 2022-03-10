@@ -2,35 +2,33 @@ package com.ashandroid.showcase.hnews.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ashandroid.showcase.hnews.R
 import com.ashandroid.showcase.hnews.model.Stories
-import com.ashandroid.showcase.hnews.adapter.TopStoriesAdapter
 import com.ashandroid.showcase.hnews.databinding.TopStoriesItemBinding
 
 
 
-class TopStoriesAdapter(val clickListener: StoriesListener) : ListAdapter<Int,TopStoriesAdapter.TopStoriesViewHolder>(DiffCallback) {
+class TopStoriesAdapter(val clickListener: StoriesListener) : ListAdapter<Stories,TopStoriesAdapter.TopStoriesViewHolder>(DiffCallback) {
 
-   companion object DiffCallback : DiffUtil.ItemCallback<Int>() {
-       override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
+   companion object DiffCallback : DiffUtil.ItemCallback<Stories>() {
+       override fun areItemsTheSame(oldItem: Stories, newItem: Stories): Boolean {
            return oldItem == newItem
        }
 
-       override fun areContentsTheSame(oldItem: Int, newItem: Int): Boolean {
+       override fun areContentsTheSame(oldItem: Stories, newItem: Stories): Boolean {
             return oldItem == newItem
        }
 
    }
 
-    class TopStoriesViewHolder(private var binding: TopStoriesItemBinding
+    class TopStoriesViewHolder(private var binding: TopStoriesItemBinding,
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(clickListener: StoriesListener, stories: Int) {
+        fun bind(clickListener: StoriesListener, stories: Stories) {   //Int type
             binding.topStories = stories
             binding.clickListener = clickListener
+
             binding.executePendingBindings()
         }
     }
@@ -43,14 +41,16 @@ class TopStoriesAdapter(val clickListener: StoriesListener) : ListAdapter<Int,To
     }
     // onBindViewHolder is called by layout manager in order to replace the contents of list item view
     override fun onBindViewHolder(holder: TopStoriesViewHolder, position: Int) {
-        val item = getItem(position)
+        val item = getItem(position)     //getItem(position)
         holder.bind(clickListener, item)
     }
 
 }
 
-class StoriesListener(val clickListener: (story: Int) -> Unit ) {
-    fun onClick(story: Int) = clickListener(story)
+// Create a class for an item in holder which is hold the data.
+// It can be bind with recyclerView in Fragment
+class StoriesListener(val clickListener: (story: Stories) -> Unit ) {
+    fun onClick(story: Stories) = clickListener(story)
 }
 
 

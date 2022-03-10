@@ -1,4 +1,4 @@
-package com.ashandroid.showcase.hnews.ui
+package com.ashandroid.showcase.hnews.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +15,7 @@ import com.ashandroid.showcase.hnews.databinding.FragmentTopStoriesBinding
 class TopStoriesFragment : Fragment() {
 
     private val viewModel: StoriesViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,7 +23,7 @@ class TopStoriesFragment : Fragment() {
 
         val binding = FragmentTopStoriesBinding.inflate(inflater)
         // Get getTopStoriesList() from ViewModel for list of items
-        viewModel.getTopStoriesList()
+        viewModel.getTopStories()
         // lifecycleOwner – The LifecycleOwner that should be used for observing changes of LiveData in this binding.
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -37,4 +38,3 @@ class TopStoriesFragment : Fragment() {
 
 }
 
-//         android:onClick="@{() -> clickListener.onClick(topStories)}">

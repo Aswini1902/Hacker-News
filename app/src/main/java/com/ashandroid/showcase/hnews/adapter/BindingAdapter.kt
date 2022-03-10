@@ -8,7 +8,7 @@ import com.ashandroid.showcase.hnews.adapter.TopStoriesAdapter
 import com.ashandroid.showcase.hnews.model.Stories
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Int>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<Stories>?) {
     val adapter = recyclerView.adapter as TopStoriesAdapter
     adapter.submitList(data)
 }
