@@ -1,7 +1,6 @@
 package com.ashandroid.showcase.hnews.ui.detail
 
-import android.content.Intent
-import android.net.Uri
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +9,7 @@ import androidx.fragment.app.Fragment
 import com.ashandroid.showcase.hnews.StoriesViewModel
 import androidx.fragment.app.activityViewModels
 import com.ashandroid.showcase.hnews.databinding.FragmentJobStoryDetailBinding
-import kotlinx.android.synthetic.main.fragment_top_story_detail.*
-
+import kotlinx.android.synthetic.main.fragment_top_story_detail.url
 
 class JobStoryDetailFragment : Fragment() {
 
@@ -35,17 +33,16 @@ class JobStoryDetailFragment : Fragment() {
         binding.jobStories = story
 
         return binding.root
-
     }
 
     override fun onResume() {
+
         url.setOnClickListener {
-            val queryUrl: Uri = Uri.parse("${url.text}")
-            val intent = Intent(Intent.ACTION_VIEW,queryUrl)
-            context?.startActivity(intent)
+            viewModel.onUrlClicked()
         }
         super.onResume()
     }
+
 }
 
 

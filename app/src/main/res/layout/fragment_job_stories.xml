@@ -11,9 +11,9 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/purple_200"
+        android:layout_width="412dp"
+        android:layout_height="778dp"
+        android:background="@color/layout_background_white"
         >
 
         <androidx.recyclerview.widget.RecyclerView

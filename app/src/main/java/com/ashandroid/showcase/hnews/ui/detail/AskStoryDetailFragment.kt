@@ -39,13 +39,11 @@ class AskStoryDetailFragment : Fragment() {
 
         htmlText?.let { binding.webView.loadData(it,  "text/html", "UTF-8") }
         return binding.root
-
     }
 
     fun stripHtml(html: String?): String? {
         return Html.fromHtml(html).toString()
     }
-
 }
 
 

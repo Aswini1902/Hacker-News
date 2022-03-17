@@ -1,7 +1,6 @@
 package com.ashandroid.showcase.hnews.ui.detail
 
-import android.content.Intent
-import android.net.Uri
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import com.ashandroid.showcase.hnews.StoriesViewModel
 import androidx.fragment.app.activityViewModels
 import com.ashandroid.showcase.hnews.databinding.FragmentTopStoryDetailBinding
 import kotlinx.android.synthetic.main.fragment_top_story_detail.*
-
 
 class TopStoryDetailFragment : Fragment() {
 
@@ -23,10 +21,10 @@ class TopStoryDetailFragment : Fragment() {
     ): View? {
 
         // Declare the variable for viewBinding, it interact with UI elements in layout file
-        val binding = FragmentTopStoryDetailBinding.inflate(inflater)
+        var binding = FragmentTopStoryDetailBinding.inflate(inflater)
 
         // Create a variable to get data in detail from viewModel
-        val story = viewModel.StoriesData.value
+        var story = viewModel.StoriesData.value
 
         // The lifecycleOwner should be used for observing changes of LiveData in this binding.
         binding.lifecycleOwner = this
@@ -35,14 +33,11 @@ class TopStoryDetailFragment : Fragment() {
         binding.topStories = story
 
         return binding.root
-
     }
 
     override fun onResume() {
         url.setOnClickListener {
-            val queryUrl: Uri = Uri.parse("${url.text}")
-            val intent = Intent(Intent.ACTION_VIEW,queryUrl)
-            context?.startActivity(intent)
+            viewModel.onUrlClicked()
         }
         super.onResume()
     }

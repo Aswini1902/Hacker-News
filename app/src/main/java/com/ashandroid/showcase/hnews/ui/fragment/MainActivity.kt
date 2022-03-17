@@ -5,11 +5,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.ashandroid.showcase.hnews.R
 import com.ashandroid.showcase.hnews.StoriesViewModel
+import com.ashandroid.showcase.hnews.ui.detail.AskStoryDetailFragment
 import com.ashandroid.showcase.hnews.ui.detail.JobStoryDetailFragment
 import com.ashandroid.showcase.hnews.ui.detail.TopStoryDetailFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import com.ashandroid.showcase.hnews.ui.detail.UrlFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,22 +24,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
+        setContentView(com.ashandroid.showcase.hnews.R.layout.activity_main)
         setCurrentFragment(topStoriesFragment)
 
         //Use NavigationBarView.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener) instead.
         bottom_navigation_view.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.topStories -> setCurrentFragment(topStoriesFragment)
-                R.id.jobStories -> setCurrentFragment(jobStoriesFragment)
-                R.id.askStories -> setCurrentFragment(askStoriesFragment)
+                com.ashandroid.showcase.hnews.R.id.topStories -> setCurrentFragment(topStoriesFragment)
+                com.ashandroid.showcase.hnews.R.id.jobStories -> setCurrentFragment(jobStoriesFragment)
+                com.ashandroid.showcase.hnews.R.id.askStories -> setCurrentFragment(askStoriesFragment)
             }
             true
         }
+
     }
     private fun setCurrentFragment(fragment:Fragment)=
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.hacker_news,fragment)
+            replace(com.ashandroid.showcase.hnews.R.id.hacker_news,fragment)
             commit()
         }
 
@@ -56,15 +58,9 @@ class MainActivity : AppCompatActivity() {
                 // Create an instance of topStoryDetailFragment for new fragment
                 val topStoryDetailFragment = TopStoryDetailFragment()
 
-                if (topStoryDetailFragment == TopStoryDetailFragment()) {
-
-                    //Use replace() to replace an existing fragment in a container
+                //Use replace() to replace an existing fragment in a container
                     // with an instance of a new fragment class that you provide.
-                    transaction.replace(R.id.hacker_news, topStoryDetailFragment)
-                } else {
-                    val jobStoryDetailFragment = JobStoryDetailFragment()
-                    transaction.replace(R.id.hacker_news, jobStoryDetailFragment)
-                }
+                transaction.replace(com.ashandroid.showcase.hnews.R.id.hacker_news, topStoryDetailFragment)
 
                 //Can save each transaction to a back stack managed by the FragmentManager
                 //allowing the user to navigate backward through the fragment changes
@@ -77,14 +73,66 @@ class MainActivity : AppCompatActivity() {
                 transaction.commit()
             }
         })
+
+        viewModel.showJobDetail.observe(this,{
+            if(it){
+                val transaction = this.supportFragmentManager.beginTransaction()
+
+                // Create an instance of jobStoryDetailFragment for new fragment
+                val jobStoryDetailFragment = JobStoryDetailFragment()
+
+                //Use replace() to replace an existing fragment in a container
+                // with an instance of a new fragment class that you provide.
+                transaction.replace(com.ashandroid.showcase.hnews.R.id.hacker_news, jobStoryDetailFragment)
+
+                transaction.addToBackStack(jobStoryDetailFragment::class.simpleName)
+
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+
+                transaction.commit()
+            }
+        })
+
+        viewModel.showQADetail.observe(this, {
+            if(it){
+                val transaction = this.supportFragmentManager.beginTransaction()
+
+                // Create an instance of askStoryDetailFragment for new fragment
+                val askStoryDetailFragment = AskStoryDetailFragment()
+
+                //Use replace() to replace an existing fragment in a container
+                // with an instance of a new fragment class that you provide.
+                transaction.replace(com.ashandroid.showcase.hnews.R.id.hacker_news, askStoryDetailFragment)
+
+                transaction.addToBackStack(askStoryDetailFragment::class.simpleName)
+
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+
+                transaction.commit()
+            }
+        })
+
+        viewModel.urlOpen.observe(this, {
+            val urlFragment = UrlFragment()
+            // consider using Java coding conventions (upper first char class names!!!)
+            val transaction = this.supportFragmentManager.beginTransaction()
+
+            // Replace whatever is in the fragment_container(usually a frame layout) view with this fragment,
+            // and add the transaction to the back stack
+            transaction.replace(com.ashandroid.showcase.hnews.R.id.hacker_news, urlFragment)
+
+            transaction.addToBackStack(urlFragment::class.simpleName)
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            // Commit the transaction
+            transaction.commit()
+        })
         super.onResume()
     }
 
     override fun onBackPressed() {
-
         // backStackEntryCount means number of fragments in the back stack
         val count = supportFragmentManager.backStackEntryCount
-        if (count == 1) {
+        if (count >= 1) {
             // popBackStack() - Pop the top state off the back stack. (or)
                 // Remove the top of the fragment in the stack based on count
             supportFragmentManager.popBackStack()

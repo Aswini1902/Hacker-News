@@ -34,6 +34,12 @@ interface StoriesApiService {
     @GET("item/{id}.json")
     suspend fun getJobStories(@Path("id") id: String) : Stories
 
+    // ASK STORIES
+    @GET("askstories.json")
+    suspend fun getAskStoriesIdList() : List<Int>
+    @GET("item/{id}.json")
+    suspend fun getAskStories(@Path("id") id: String) : Stories
+
 }
 
 // define a public object called MarsApi to initialize the Retrofit service.

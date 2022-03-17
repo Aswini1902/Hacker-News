@@ -3,8 +3,7 @@
 
     <item
         android:id="@+id/topStories"
-        android:title="Top Stories"
-        android:icon="@drawable/ic_trending_foreground"/>
+        android:title="Top Stories"/>
     <item
         android:id="@+id/jobStories"
         android:title="Job Stories"/>
