@@ -8,6 +8,6 @@ import android.view.ViewGroup
 import com.ashandroid.showcase.hnews.R
 
 
-class AboutUsFragment : Fragment() {
+class SettingsFragment : Fragment() {
 
 }
