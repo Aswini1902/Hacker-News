@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.HackerNews" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/teal_200</item>
-        <item name="colorPrimaryVariant">@color/purple_200</item>
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryVariant">@color/orange</item>
         <item name="colorOnPrimary">@color/layout_background_white</item>
         <!-- <item name="colorOnPrimary">@color/white</item> -->
 

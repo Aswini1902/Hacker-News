@@ -3,12 +3,19 @@
 
     <item
         android:id="@+id/topStories"
-        android:title="Top Stories"/>
+        android:title="Top Stories"
+        android:icon="@drawable/ico_top_stories"/>
     <item
         android:id="@+id/jobStories"
-        android:title="Job Stories"/>
+        android:title="Job Stories"
+        android:icon="@drawable/ico_job_stories"/>
     <item
         android:id="@+id/askStories"
-        android:title="Q/A"/>
+        android:title="Q/A"
+        android:icon="@drawable/ico_q_and_a"/>
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        android:icon="@drawable/ico_settings"/>
 
 </menu>

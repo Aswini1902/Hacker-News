@@ -12,11 +12,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.detail.UrlFragment">
+        
 
         <WebView
             android:id="@+id/webView"
+            android:layout_marginStart="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:layout_gravity="left|top"
+
+            android:src="@drawable/close_foreground"/>
 
     </FrameLayout>
 </layout>

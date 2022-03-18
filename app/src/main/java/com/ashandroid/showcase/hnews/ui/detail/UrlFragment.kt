@@ -8,7 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.ashandroid.showcase.hnews.StoriesViewModel
 import com.ashandroid.showcase.hnews.databinding.FragmentUrlBinding
-
+import com.ashandroid.showcase.hnews.generated.callback.OnClickListener
+import kotlinx.android.synthetic.main.fragment_url.*
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
+import com.ashandroid.showcase.hnews.R
 
 class UrlFragment : Fragment() {
 
@@ -29,4 +34,13 @@ class UrlFragment : Fragment() {
 
         return binding.root
     }
+
+    override fun onResume() {
+        super.onResume()
+        close.setOnClickListener {
+            findNavController().navigate(R.id.action_urlFragment_to_topStoryDetailFragment)
+        }
+
+    }
+
 }

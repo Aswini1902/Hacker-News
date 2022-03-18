@@ -41,6 +41,7 @@ class TopStoryDetailFragment : Fragment() {
         }
         super.onResume()
     }
+
 }
 
 

@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     val topStoriesFragment = TopStoriesFragment()
     val jobStoriesFragment = JobStoriesFragment()
     val askStoriesFragment = AskStoriesFragment()
-
+    val settingsFragment = SettingsFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                 com.ashandroid.showcase.hnews.R.id.topStories -> setCurrentFragment(topStoriesFragment)
                 com.ashandroid.showcase.hnews.R.id.jobStories -> setCurrentFragment(jobStoriesFragment)
                 com.ashandroid.showcase.hnews.R.id.askStories -> setCurrentFragment(askStoriesFragment)
+                com.ashandroid.showcase.hnews.R.id.settings -> setCurrentFragment(settingsFragment)
             }
             true
         }
