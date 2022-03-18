@@ -12,7 +12,6 @@ import com.ashandroid.showcase.hnews.generated.callback.OnClickListener
 import kotlinx.android.synthetic.main.fragment_url.*
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
 import com.ashandroid.showcase.hnews.R
 
 class UrlFragment : Fragment() {
@@ -38,7 +37,7 @@ class UrlFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         close.setOnClickListener {
-            findNavController().navigate(R.id.action_urlFragment_to_topStoryDetailFragment)
+            activity?.supportFragmentManager?.popBackStack()
         }
 
     }
