@@ -27,7 +27,7 @@ class TopStoriesFragment : Fragment() {
 
         val binding = FragmentTopStoriesBinding.inflate(inflater)
         // Get getTopStoriesList() from ViewModel for list of items
-        viewModel.getTopStories(n)
+        viewModel.getTopStories()
         // lifecycleOwner – The LifecycleOwner that should be used for observing changes of LiveData in this binding.
         binding.lifecycleOwner = this
         binding.viewModel = viewModel

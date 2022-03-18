@@ -83,4 +83,7 @@ dependencies {
 
     //Jsoup library for scraping web pages
     implementation("org.jsoup:jsoup:1.11.3")
+
+    //Progress bar library
+    implementation 'com.github.castorflex.smoothprogressbar:library:1.1.0'
 }

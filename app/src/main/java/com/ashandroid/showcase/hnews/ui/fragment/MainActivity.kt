@@ -39,11 +39,20 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    private fun setCurrentFragment(fragment:Fragment)=
+    private fun setCurrentFragment(fragment:Fragment){
+        //clear backstack before setting
+
+        val noOfOldFragments = supportFragmentManager.backStackEntryCount
+        for(i in 0..noOfOldFragments){
+            supportFragmentManager.popBackStack()
+        }
+
         supportFragmentManager.beginTransaction().apply {
             replace(com.ashandroid.showcase.hnews.R.id.hacker_news,fragment)
             commit()
         }
+    }
+
 
     override fun onResume() {
 
