@@ -62,7 +62,7 @@ class StoriesViewModel : ViewModel() {
                     list.add(story)
                 }
                 val oldEntryTopStory = (_topStoriesList.value?.size ?: 0) > 0
-                if (oldEntryTopStory){
+                if (oldEntryTopStory || n!=0){
                     val oldList = _topStoriesList.value !!
                     val oldMutableList = mutableListOf<Stories>()
                     for(item in oldList){
@@ -85,7 +85,8 @@ class StoriesViewModel : ViewModel() {
         viewModelScope.launch {
             _status.value = StoriesApiStatus.LOADING
             try {
-                val idList  = StoriesApi.retrofitService.getJobStoriesIdList()
+                var idList  = StoriesApi.retrofitService.getJobStoriesIdList()
+                idList = idList.toSet().toList()
                 var list = mutableListOf<Stories>()
                 val start = n*10
                 val end = start + 10
@@ -94,7 +95,7 @@ class StoriesViewModel : ViewModel() {
                     list.add(job)
                 }
                 val oldEntry = (_jobsList.value?.size ?: 0) > 0
-                if (oldEntry){
+                if (oldEntry || n!=0){
                     val oldList = _jobsList.value !!
                     val oldMutableList = mutableListOf<Stories>()
                     for(item in oldList){
