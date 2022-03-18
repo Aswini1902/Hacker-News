@@ -6,6 +6,14 @@
         <variable
             name="topStories"
             type="com.ashandroid.showcase.hnews.model.Stories" />
+        <variable
+            name="htmlPreview"
+            type="String" />
+        <variable
+            name="parsedTime"
+            type="String" />
+
+
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -33,14 +41,39 @@
 
             <TextView
                 android:id="@+id/by"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:text="@{topStories.by}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+
                 app:layout_constraintTop_toBottomOf="@id/title"/>
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="@{parsedTime}"
+                app:layout_constraintStart_toEndOf="@+id/by"
+                app:layout_constraintTop_toBottomOf="@id/title"
+
+                />
+
+            <TextView
+                android:id="@+id/url_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="@{htmlPreview}"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/by"/>
 
             <TextView
                 android:id="@+id/url"
@@ -48,23 +81,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                android:text="@{topStories.url}"
+                android:text="Read more..."
                 android:textSize="18sp"
                 android:textColor="@color/orange"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/by"/>
+                app:layout_constraintTop_toBottomOf="@id/url_preview"/>
 
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:text="@{topStories.time.toString()}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/url"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
