@@ -80,4 +80,7 @@ dependencies {
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.4.1"
     implementation "androidx.navigation:navigation-ui-ktx:2.4.1"
+
+    //Jsoup library for scraping web pages
+    implementation("org.jsoup:jsoup:1.11.3")
 }

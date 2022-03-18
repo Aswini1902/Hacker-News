@@ -52,13 +52,14 @@ class StoriesViewModel : ViewModel() {
         viewModelScope.launch {
             _status.value = StoriesApiStatus.LOADING
             try {
-                val idList  = StoriesApi.retrofitService.getTopStoriesIdList()
+                var idList  = StoriesApi.retrofitService.getTopStoriesIdList()
+                idList = idList.toSet().toList()
                 var list = mutableListOf<Stories>()
                 val start = n*10
                 val end = start + 10
                 for (i in idList.subList(start, end)){
-                    _StoriesData.value = StoriesApi.retrofitService.getTopStories(i.toString())
-                    list.add(_StoriesData.value!!)
+                    val story = StoriesApi.retrofitService.getTopStories(i.toString())
+                    list.add(story)
                 }
                 val oldEntryTopStory = (_topStoriesList.value?.size ?: 0) > 0
                 if (oldEntryTopStory){
