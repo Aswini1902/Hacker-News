@@ -51,8 +51,7 @@
             android:text="Top Stories"
             android:textColor="@color/item_title_nile_blue"
             android:textSize="24sp"
-            android:textStyle="bold"
-             />
+            android:textStyle="bold"/>
 
 
         <androidx.recyclerview.widget.RecyclerView

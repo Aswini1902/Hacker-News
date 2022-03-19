@@ -36,17 +36,30 @@
             android:visibility="@{viewModel.showProgressQA ? 0 : 8 }"
             />
 
+        <TextView
+            android:id="@+id/text"
+            style="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_bold"
+            android:padding="5dp"
+            android:text="Ask Stories"
+            android:textColor="@color/item_title_nile_blue"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="8dp"
+            android:layout_height="wrap_content"
             app:listData="@{viewModel.askList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/progress"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/text"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
