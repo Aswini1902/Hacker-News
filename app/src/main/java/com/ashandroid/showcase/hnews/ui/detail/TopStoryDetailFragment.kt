@@ -68,6 +68,10 @@ class TopStoryDetailFragment : Fragment() {
             viewModel.onUrlClicked()
         }
         super.onResume()
+
+        back.setOnClickListener {
+            activity?.supportFragmentManager?.popBackStack()
+        }
     }
 
 }

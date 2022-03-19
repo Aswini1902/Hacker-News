@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Techster</string>
+    <string name="read_more"><u>Read more...</u></string>
 </resources>
