@@ -9,7 +9,8 @@ import androidx.fragment.app.Fragment
 import com.ashandroid.showcase.hnews.StoriesViewModel
 import androidx.fragment.app.activityViewModels
 import com.ashandroid.showcase.hnews.databinding.FragmentJobStoryDetailBinding
-import kotlinx.android.synthetic.main.fragment_top_story_detail.url
+import kotlinx.android.synthetic.main.fragment_job_story_detail.*
+
 
 class JobStoryDetailFragment : Fragment() {
 
