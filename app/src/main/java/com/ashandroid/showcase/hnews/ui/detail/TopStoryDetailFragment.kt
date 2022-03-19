@@ -53,7 +53,7 @@ class TopStoryDetailFragment : Fragment() {
     ) {
         //Set the utility to parse HTML content
         MainScope().launch(Dispatchers.IO) {
-
+            binding.htmlPreview = ""
             story?.url?.let {
                 HTMLScrapper().parseContent(it, { preview ->
                     binding.htmlPreview = preview
