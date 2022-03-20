@@ -6,7 +6,7 @@ import java.lang.Exception
 
 class HTMLScrapper {
 
-    fun parseContent(url: String, callback: (String?) -> Unit, totalWords: Int = 100) {
+    fun parseContent(url: String, callback: (String?) -> Unit, totalWords: Int = 50) {
 
         try {
             val doc = Jsoup.connect(url).get()
