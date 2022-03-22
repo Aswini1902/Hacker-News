@@ -43,7 +43,10 @@ class AskStoryDetailFragment : Fragment() {
     }
 
     fun stripHtml(html: String?): String? {
-        return Html.fromHtml(html).toString()
+        html?.let {
+            return Html.fromHtml(html).toString()
+        }
+        return ""
     }
 
     override fun onResume() {

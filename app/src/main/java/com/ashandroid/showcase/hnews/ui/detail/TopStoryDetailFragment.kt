@@ -56,7 +56,7 @@ class TopStoryDetailFragment : Fragment() {
             binding.htmlPreview = ""
             story?.url?.let {
                 HTMLScrapper().parseContent(it, { preview ->
-                    binding.htmlPreview = preview
+                    binding?.htmlPreview = preview
 
                 })
             }
