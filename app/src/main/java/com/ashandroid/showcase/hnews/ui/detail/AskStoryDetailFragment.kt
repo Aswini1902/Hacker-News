@@ -10,6 +10,7 @@ import com.ashandroid.showcase.hnews.StoriesViewModel
 import androidx.fragment.app.activityViewModels
 import com.ashandroid.showcase.hnews.databinding.FragmentAskStoryDetailBinding
 import android.text.Html
+import kotlinx.android.synthetic.main.fragment_top_story_detail.*
 
 class AskStoryDetailFragment : Fragment() {
 
@@ -42,7 +43,17 @@ class AskStoryDetailFragment : Fragment() {
     }
 
     fun stripHtml(html: String?): String? {
-        return Html.fromHtml(html).toString()
+        html?.let {
+            return Html.fromHtml(html).toString()
+        }
+        return ""
+    }
+
+    override fun onResume() {
+        super.onResume()
+        back.setOnClickListener {
+            activity?.supportFragmentManager?.popBackStack()
+        }
     }
 }
 

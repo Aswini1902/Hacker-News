@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">Hacker News</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Techster</string>
+    <string name="read_more"><u>Read more...</u></string>
+    <string name="about_techster_title">About Techster</string>
+    <string name="about_techster_content">Techster is an app for anyone who wants to stay upto date on recents happenings in the tech industry. Currently the app is built on open source and public Hacker News api.</string>
+    <string name="about_me">I’m Aswini Srinivasan.\nI’m a newbie to android app development. I built this app using recent android framework to showcase my skills. </string>
+    <string name="about_me_title">About me</string>
+
 </resources>

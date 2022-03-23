@@ -9,7 +9,12 @@ import androidx.fragment.app.Fragment
 import com.ashandroid.showcase.hnews.StoriesViewModel
 import androidx.fragment.app.activityViewModels
 import com.ashandroid.showcase.hnews.databinding.FragmentTopStoryDetailBinding
+import com.ashandroid.showcase.hnews.model.Stories
+import com.ashandroid.showcase.hnews.utils.HTMLScrapper
 import kotlinx.android.synthetic.main.fragment_top_story_detail.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 class TopStoryDetailFragment : Fragment() {
 
@@ -32,7 +37,30 @@ class TopStoryDetailFragment : Fragment() {
         // Set the data(story) with dataBinding variable
         binding.topStories = story
 
+        val unixTime = (story?.time?:0).toLong()
+
+        binding.parsedTime = viewModel.getDateString(unixTime)
+
+        parseUrlForPreview(binding, story)
+
+
         return binding.root
+    }
+
+    private fun parseUrlForPreview(
+        binding: FragmentTopStoryDetailBinding,
+        story: Stories?
+    ) {
+        //Set the utility to parse HTML content
+        MainScope().launch(Dispatchers.IO) {
+            binding.htmlPreview = ""
+            story?.url?.let {
+                HTMLScrapper().parseContent(it, { preview ->
+                    binding?.htmlPreview = preview
+
+                })
+            }
+        }
     }
 
     override fun onResume() {
@@ -40,6 +68,10 @@ class TopStoryDetailFragment : Fragment() {
             viewModel.onUrlClicked()
         }
         super.onResume()
+
+        back.setOnClickListener {
+            activity?.supportFragmentManager?.popBackStack()
+        }
     }
 
 }

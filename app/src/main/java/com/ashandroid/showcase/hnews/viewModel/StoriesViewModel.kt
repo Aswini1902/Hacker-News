@@ -1,6 +1,7 @@
 package com.ashandroid.showcase.hnews
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -48,20 +49,41 @@ class StoriesViewModel : ViewModel() {
     private val _urlOpen = MutableLiveData<Boolean>()
     var urlOpen : LiveData<Boolean> = _urlOpen
 
+    private val _showProgressTopStories = MutableLiveData<Boolean>()
+    var showProgressTopStories: LiveData<Boolean> = _showProgressTopStories
+
+    private val _showProgressJobStories = MutableLiveData<Boolean>()
+    var showProgressJobStories: LiveData<Boolean> = _showProgressJobStories
+
+    private val _showProgressQA = MutableLiveData<Boolean>()
+    var showProgressQA: LiveData<Boolean> = _showProgressQA
+
+
+
+
     fun getTopStories(n:Int = 0) {
         viewModelScope.launch {
+
             _status.value = StoriesApiStatus.LOADING
             try {
-                val idList  = StoriesApi.retrofitService.getTopStoriesIdList()
+                val oldEntryTopStory = (_topStoriesList.value?.size ?: 0) > 0
+                if(n==0 && oldEntryTopStory){
+                    //dont load more until scroll end
+                    _status.value = StoriesApiStatus.DONE
+                    return@launch
+                }
+                _showProgressTopStories.value = true
+                var idList  = StoriesApi.retrofitService.getTopStoriesIdList()
+                idList = idList.toSet().toList()
                 var list = mutableListOf<Stories>()
-                val start = n*10
+                val start = n * 10
                 val end = start + 10
                 for (i in idList.subList(start, end)){
-                    _StoriesData.value = StoriesApi.retrofitService.getTopStories(i.toString())
-                    list.add(_StoriesData.value!!)
+                    val story = StoriesApi.retrofitService.getTopStories(i.toString())
+                    list.add(story)
                 }
-                val oldEntryTopStory = (_topStoriesList.value?.size ?: 0) > 0
-                if (oldEntryTopStory){
+
+                if (oldEntryTopStory || n!=0){
                     val oldList = _topStoriesList.value !!
                     val oldMutableList = mutableListOf<Stories>()
                     for(item in oldList){
@@ -73,18 +95,31 @@ class StoriesViewModel : ViewModel() {
                     _topStoriesList.value = list
                 }
 
+
                 _status.value = StoriesApiStatus.DONE
+                _showProgressTopStories.value = false
             } catch (e: Exception){
                 _status.value = StoriesApiStatus.ERROR
+                _showProgressTopStories.value = false
             }
         }
     }
 
     fun getJobStories(n:Int = 0) {
         viewModelScope.launch {
+
+            val oldEntry = (_jobsList.value?.size ?: 0) > 0
+            if(n==0 && oldEntry){
+                //dont load more until scroll end
+                _status.value = StoriesApiStatus.DONE
+                return@launch
+            }
+
+            _showProgressJobStories.value = true
             _status.value = StoriesApiStatus.LOADING
             try {
-                val idList  = StoriesApi.retrofitService.getJobStoriesIdList()
+                var idList  = StoriesApi.retrofitService.getJobStoriesIdList()
+                idList = idList.toSet().toList()
                 var list = mutableListOf<Stories>()
                 val start = n*10
                 val end = start + 10
@@ -92,8 +127,8 @@ class StoriesViewModel : ViewModel() {
                     val job = StoriesApi.retrofitService.getJobStories(i.toString())
                     list.add(job)
                 }
-                val oldEntry = (_jobsList.value?.size ?: 0) > 0
-                if (oldEntry){
+
+                if (oldEntry || n!=0){
                     val oldList = _jobsList.value !!
                     val oldMutableList = mutableListOf<Stories>()
                     for(item in oldList){
@@ -111,27 +146,59 @@ class StoriesViewModel : ViewModel() {
                 Log.d("scroll", "${_jobsList.value}")
 
                 _status.value = StoriesApiStatus.DONE
+                _showProgressJobStories.value = false
             } catch (e: Exception){
                 _status.value = StoriesApiStatus.ERROR
+                _showProgressJobStories.value = false
             }
         }
     }
 
-    fun getAskStories() {
+    fun getAskStories(n:Int = 0) {
         viewModelScope.launch {
+
+            val oldEntry = (_askList.value?.size ?: 0) > 0
+            if(n==0 && oldEntry){
+                //dont load more until scroll end
+                _status.value = StoriesApiStatus.DONE
+                return@launch
+            }
+
             _status.value = StoriesApiStatus.LOADING
+            _showProgressQA.value = true
             try {
                 val idList  = StoriesApi.retrofitService.getAskStoriesIdList()
                 var list = mutableListOf<Stories>()
-                for (i in idList.subList(0,10)){
+                val start = n*10
+                val end = start + 10
+
+
+                for (i in idList.subList(start,end)){
                     val job = StoriesApi.retrofitService.getAskStories(i.toString())
                     list.add(job)
                 }
+
+                if (oldEntry || n!=0){
+                    val oldList = _askList.value !!
+                    val oldMutableList = mutableListOf<Stories>()
+                    for(item in oldList){
+                        oldMutableList.add(item)
+                    }
+                    oldMutableList.addAll(list)
+                    _askList.value = oldMutableList.sortedBy { it.time }.reversed()
+                }
+                else{
+                    _askList.value = list.sortedBy { it.time }.reversed()
+                }
+
+
                 _askList.value = list
 
                 _status.value = StoriesApiStatus.DONE
+                _showProgressQA.value = false
             } catch (e: Exception){
                 _status.value = StoriesApiStatus.ERROR
+                _showProgressQA.value = false
             }
         }
     }

@@ -14,7 +14,7 @@ android {
         applicationId "com.ashandroid.showcase.hnews"
         minSdk 24
         targetSdk 30
-        versionCode 1
+        versionCode 3
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -80,4 +80,13 @@ dependencies {
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.4.1"
     implementation "androidx.navigation:navigation-ui-ktx:2.4.1"
+
+    //Jsoup library for scraping web pages
+    implementation("org.jsoup:jsoup:1.11.3")
+
+    //Progress bar library
+    implementation 'com.github.castorflex.smoothprogressbar:library:1.1.0'
+
+    //Circle Images Library
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }
