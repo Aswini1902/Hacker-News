@@ -42,7 +42,7 @@ interface StoriesApiService {
 
 }
 
-// define a public object called MarsApi to initialize the Retrofit service.
+// define a public object called StoriesApi to initialize the Retrofit service.
 object StoriesApi {
 
     //  add a lazily initialized retrofit object property
