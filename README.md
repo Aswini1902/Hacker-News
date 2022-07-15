@@ -1,3 +1,4 @@
+Adding some text
 # About Techster 
 Techster is an app for anyone who wants to stay upto date on recents happenings in the tech industry. Curretly the app is built on open source and public Hacker News api.
 It is availabe in google playstore only to showcase my development skills
